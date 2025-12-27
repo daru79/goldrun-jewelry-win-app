@@ -9,6 +9,8 @@ Route::get('/', function () {
 
 Route::get('/check-for-updates', function () {
     AutoUpdater::checkForUpdates();
+    AutoUpdater::downloadUpdate();
+    AutoUpdater::quitAndInstall();
 
     dd(AutoUpdater::checkForUpdates());
 
