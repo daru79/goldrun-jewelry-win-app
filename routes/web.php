@@ -1,18 +1,22 @@
 <?php
 
+use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 use Native\Desktop\Facades\AutoUpdater;
 
 Route::get('/', function () {
-    return view('welcome');
+    $posts = Post::all();
+    return view('welcome',
+        [
+            'posts' => $posts
+        ]
+    );
 });
 
 Route::get('/check-for-updates', function () {
     AutoUpdater::checkForUpdates();
     AutoUpdater::downloadUpdate();
     AutoUpdater::quitAndInstall();
-
-    dd(AutoUpdater::checkForUpdates());
 
     return;
 })->name('check-for-updates');
